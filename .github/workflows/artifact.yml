@@ -42,4 +42,4 @@ jobs:
           name: linux
 
       - name: Test  ${{ env.FILE_NAME }} on ubuntu-latest
-        run: source ./test.sh
+        run: source ./testActionsArtifact/test.sh
