@@ -11,6 +11,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          repository: RenzoPL23/GitActions
+          ref: main
+          path: ./testActionsArtifact
 
       - name: Build Project ${{ env.FILE_NAME }} for ubuntu-latest
         run: go build ${{ env.FILE_NAME }}.go
@@ -22,11 +26,15 @@ jobs:
           path: ./${{ env.FILE_NAME }}
 
   test-linux:
-    needs: artifact-job
+    needs: [artifact-job]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+        with:
+          repository: RenzoPL23/GitActions
+          ref: main
+          path: ./testActionsArtifact
 
       - name: Download Artifact for linux
         uses: actions/download-artifact@v5
