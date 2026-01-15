@@ -22,8 +22,8 @@ jobs:
         uses: actions/checkout@v2
       - name: steps two
         run: "Get-ChildItem Env: | Sort-Object Name"
+
   job3:
-    needs: [job1, job2]
     name: Third Job
     runs-on: macos-latest
     steps: 
@@ -31,3 +31,10 @@ jobs:
         uses: actions/checkout@v2
       - name: steps two
         run: env | sort
+  job4:
+    needs: [job1, job2, job3]
+    name: Fourth job
+    runs-on: macos-latest
+    steps:
+      - name: steps one
+        uses: actions/checkout@v2
