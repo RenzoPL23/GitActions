@@ -17,7 +17,8 @@ jobs:
           path: ./testActionsArtifact
 
       - name: Build Project ${{ env.FILE_NAME }} for ubuntu-latest
-        run: go build ./testActionsArtifact/${{ env.FILE_NAME }}.go
+        run:  go build -o ./testActionsArtifact/${{ env.FILE_NAME }}
+            ./testActionsArtifact/${{ env.FILE_NAME }}.go
       
       - name: Upload Artifact for linux
         uses: actions/upload-artifact@v4
