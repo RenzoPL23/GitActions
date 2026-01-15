@@ -41,7 +41,7 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: linux
-          path: ./testActionsArtifact/
+          path: ./linux
 
       - name: Test  ${{ env.FILE_NAME }} on ubuntu-latest
         run: source ./testActionsArtifact/test.sh
