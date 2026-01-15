@@ -1,0 +1,35 @@
+name: artifact
+
+on: push
+
+jobs:
+  artifact-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        
+      - name: Build Project ${{env.FILE_NAME}} for ubuntu-latest
+        run: go build ${{env.FILE_NAME}}.go
+      
+      - name: Upload Artifact for linux
+        uses: actions/upload-artifact@v1.0.0
+        with:
+          name: linux
+          path: ./${{env.FILE_NAME}}
+
+  test-linux:
+    needs: artifact-job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Download Artifact for linux
+        uses: actions/download-artifact@v1.0.0
+        with:
+          name: linux
+
+      - name: Test  ${{env.FILE_NAME}} on ubuntu-latest
+        run: source ./test.sh
+        
